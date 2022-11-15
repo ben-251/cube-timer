@@ -71,11 +71,8 @@ anchor_left = 0.21
 anchor_top = 0.5
 anchor_right = 0.9
 anchor_bottom = 0.8
-columns = 2
 
 [node name="ao5" type="Control" parent="ColorRect/averages/GridContainer"]
-anchor_right = 1.0
-anchor_bottom = 0.5
 
 [node name="averages-box" type="ColorRect" parent="ColorRect/averages/GridContainer/ao5"]
 anchor_right = 1.0
@@ -89,11 +86,8 @@ custom_fonts/font = SubResource( 2 )
 text = "ao5: "
 
 [node name="ao12" type="Control" parent="ColorRect/averages/GridContainer"]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
 
 [node name="averages-box" type="ColorRect" parent="ColorRect/averages/GridContainer/ao12"]
 anchor_right = 1.0
