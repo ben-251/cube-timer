@@ -1,5 +1,8 @@
 extends Label
 
+class t:
+	pass
+
 func _ready():
 	#save_file("3x3","")
 	text = "0.00"
@@ -8,12 +11,6 @@ var timing = false
 var time_elapsed = 0.0
 var about_to_time = false
 
-func update_time_list():	
-	var timer_grid = get_parent().get_parent().get_node("times").get_child(0)
-	
-	var new_time = Label.new()
-	timer_grid.add_child(new_time)
-	timer_grid.get_children()[-1].text = prep_digits(time_elapsed)
 	
 
 
@@ -42,7 +39,7 @@ func _input(event):
 			var times = load_file("3x3")
 			times += prep_digits(time_elapsed)+"\n"
 			save_file("3x3",times)
-			update_time_list()
+			#update_time_list()
 
 		else:
 			about_to_time = true
@@ -52,6 +49,25 @@ func _input(event):
 		about_to_time = false
 		timing = true
 
+
+func str_to_list(string):
+	var arr = []
+	for character in string:
+		arr.append(character)
+	return arr
+
+func get_decimal_digits(num):
+	var number = str(num)
+	var decimal_found = false
+	var digits = ""
+
+	for character in number:
+		if character == ".":
+			decimal_found = true
+		if decimal_found:
+			digits += character
+	return digits
+
 func is_whole_num(number):
 	for character in number:
 		if character != ".":
@@ -59,14 +75,20 @@ func is_whole_num(number):
 		if character != "0":
 			return false
 	return true
-	
-func prep_digits(number):
-	number = stepify(time_elapsed,0.01)
+
+func prep_digits(num):
+	var number = stepify(num,0.01)
 	number = str(number)
+	
+	var decimal_digits = get_decimal_digits(number)
+	
 	if is_whole_num(number):
-		number += ".0"
-	while number.length() < 4 and not is_whole_num(number):
-		number += "0"
+		number += ".00"
+	else:
+		for i in range(2-len(decimal_digits)):
+			number += "0"
+		
+	
 	return number
 	
 func _process(delta):

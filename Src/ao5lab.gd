@@ -27,10 +27,10 @@ func load_file(name):
 
 func update_average(file_name):
 	var times = file_to_list(file_name)
-	if len(times) > 12:
+	if len(times) >= 12:
 		#update_ao12(times)
 		update_ao5(times)
-	elif len(times) > 5:
+	elif len(times) >= 5:
 		update_ao5(times)
 
 func calculate_average(inputs, sample_size):
@@ -42,31 +42,9 @@ func calculate_average(inputs, sample_size):
 	var avg = total/sample_size
 	return avg
 
-func set_average_text(avg):
-	var string
-	var colon_found = false
-	var current_average = ""
-	
-	for character in self.text:
-		if character != ":":
-			colon_found = true
-		if colon_found:
-			current_average += character
-			
-			
-			
-			
-			
-	if len(self.text)>=8:
-		string = self.text.substr(0,len(self.text)-4)
-	else:
-		string = self.text
-	self.text = "ao5: " + avg
-
 func update_ao5(times):
 	var avg = str(stepify(calculate_average(times, 5),0.01))
-	set_average_text(avg)
-	pass
+	self.text = "ao5: " + avg 
 	
 func file_to_list(file_name):
 	var file_content = load_file(file_name)
